@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+      <title>Document</title>
+
+      <script>
+            $(document).ready(function () {
+                  // show_penjumlahan();
+            });
+
+            function jumlah() {
+                  let bil1 = $('#bil1').val();
+                  let bil2 = $('#bil2').val();
+                  let hasil = parseInt(bil1) + parseInt(bil2);
+
+                  alert(hasil);
+            }
+
+            function show_penjumlahan() {
+                  $.ajax({
+                        type: "GET",
+                        url: "/penjumlahan?sample_give=get-data",
+                        data: {},
+                        success: function (response) {
+                              alert(response['message']);
+                        }
+                  })
+            }
+
+            function save_penjumlahan() {
+                  let bil1 = $('#bil1').val();
+                  let bil2 = $('#bil2').val();
+                  $.ajax({
+                        type: "POST",
+                        url: "/penjumlahan",
+                        data: {
+                              "bil1": bil1,
+                              "bil2": bil2
+                        },
+                        success: function (response) {
+                              alert(response['message']);
+                        }
+                  })
+            }
+      </script>
+</head>
+
+<body>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                  <div class="modal-content">
+                        <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Operasi Penjumlahan</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                              <div class="d-flex justify-content-center">
+                                    <div class="w-50 mt-3">
+                                          <label class="form-label text-uppercase"><b>Number 1:</b></label>
+                                          <input type="number" class="form-control" id="bil11">
+                                          <label class="form-label text-uppercase"><b>Number 2:</b></label>
+                                          <input type="number" class="form-control" id="bil22">
+                                          <div class="d-flex flex-row mt-2">
+                                                <button onclick="save_penjumlahan()"
+                                                      class="btn btn-danger p-2">Calculate <i class="bi bi-plus"></i>
+                                                </button>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <h2 class="d-flex justify-content-center mt-3 text-uppercase">Kalkulator Penjumlahan</h2>
+      <div class="d-flex justify-content-center">
+            <div class="w-30 mt-3">
+                  <label class="form-label text-uppercase"><b>Number 1:</b></label>
+                  <input type="number" class="form-control" id="bil1">
+                  <label class="form-label text-uppercase"><b>Number 2:</b></label>
+                  <input type="number" class="form-control" id="bil2">
+                  <div class="d-flex flex-row-reverse mt-2">
+                        <!-- <button class="btn btn-primary p-2 me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Show Modal!</button> -->
+                        <button onclick="save_penjumlahan()" class="btn btn-danger p-2">Calculate <i class="bi bi-plus"></i> </button>
+                  </div>
+            </div>
+      </div>
+</body>
+
+</html>
